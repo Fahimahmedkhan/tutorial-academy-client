@@ -2,6 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
+/**
+ * It returns a div with a class of bg-black text-white px-10 py-10 border-t-4 border-zinc-300
+ * dark:bg-gray-900. Inside that div, there's another div with a class of flex justify-between
+ * items-center space-x-10. Inside that div, there's two more divs. The first div has a class of
+ * text-3xl pb-4. Inside that div, there's a Link to the homepage with a class of
+ * hover:text-orange-300. Inside that Link, there's an h1 with a class of text-3xl pb-4. The second div
+ * has a class of text-xl hover:text-orange-300 pb-2. Inside that div, there's a Link to the courses
+ * page with a class of text-xl hover:text-orange-300 pb-2. Inside that Link, there
+ * @returns A React component.
+ */
 const Footer = () => {
     return (
         <div className='bg-black text-white px-10 py-10 border-t-4 border-zinc-300 dark:bg-gray-900'>

@@ -3,6 +3,10 @@ import Banner from '../Banner/Banner';
 import HomeCard from '../HomeCard/HomeCard';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
+/**
+ * It returns a div with a bunch of other components inside of it
+ * @returns A div with a banner, a div with a card, and a map.
+ */
 const Home = () => {
     return (
         <div className='mt-8 mb-8'>

@@ -1,7 +1,16 @@
 import React from 'react';
 import { Accordion } from "flowbite-react";
 
-
+/**
+ * It returns a div that contains a div with a class of mb-8 mt-10 and an h1 with a class of
+ * text-center text-3xl. The h1 has the text Questions & Answer. The div with a class of m-6 contains
+ * an Accordion component. The Accordion component contains four Accordion.Panel components. Each
+ * Accordion.Panel component contains an Accordion.Title component and an Accordion.Content component.
+ * The Accordion.Title component has a class of text-2xl and the text of the question. The
+ * Accordion.Content component contains a p tag with a class of mb-2 text-gray-500 dark:text-gray-400
+ * and the text of the answer
+ * @returns A React component.
+ */
 const Blog = () => {
     return (
         <div>
