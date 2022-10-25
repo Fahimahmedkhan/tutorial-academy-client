@@ -12,7 +12,7 @@ const NavBar = () => {
         }
     }
     return (
-        <nav className='px-20 py-2 text-xl font-bold border-b-4 border-zinc-300 flex items-center justify-between text-black dark:text-white'>
+        <nav className='px-20 py-2 text-xl font-bold border-b-4 border-zinc-300 flex items-center justify-between text-black dark:text-white bg-white dark:bg-gray-900'>
             <div className='flex items-center justify-between space-x-32'>
                 <div className='flex items-center justify-betweens space-x-4'>
                     <img src={logo} alt="" className='h-16 w-16 rounded-full' />

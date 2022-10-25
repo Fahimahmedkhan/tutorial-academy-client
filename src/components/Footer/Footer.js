@@ -4,7 +4,7 @@ import './Footer.css';
 
 const Footer = () => {
     return (
-        <div className='bg-black text-white px-10 py-10'>
+        <div className='bg-black text-white px-10 py-10 border-t-4 border-zinc-300 bg-white dark:bg-gray-900'>
             <div className='flex justify-between items-center space-x-10 '>
                 <div>
                     <Link to='/' className='hover:text-orange-300'><h1 className='text-3xl pb-4'>Tutorial Academy</h1></Link>
