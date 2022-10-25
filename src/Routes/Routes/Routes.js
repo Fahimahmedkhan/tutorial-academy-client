@@ -5,6 +5,8 @@ import Courses from "../../components/Courses/Courses";
 import ErrorPage from "../../components/ErrorPage/ErrorPage";
 import FAQ from "../../components/FAQ/FAQ";
 import Home from "../../components/Home/Home";
+import LogIn from "../../components/LogIn/LogIn";
+import Register from "../../components/Register/Register";
 import Main from "../../layouts/Main";
 
 export const routes = createBrowserRouter([
@@ -33,6 +35,14 @@ export const routes = createBrowserRouter([
                 path: '/about',
                 element: <AboutUs></AboutUs>
             },
+            {
+                path: '/login',
+                element: <LogIn></LogIn>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
+            }
         ]
     }
 ])
