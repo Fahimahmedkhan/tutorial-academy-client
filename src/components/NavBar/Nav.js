@@ -82,7 +82,7 @@ const Nav = () => {
                     <NavLink onClick={navLinkStyles} to="/" className='hover:text-orange-300'>
                         Home
                     </NavLink>
-                    <NavLink onClick={navLinkStyles} to="/courses" className='hover:text-orange-300'>
+                    <NavLink onClick={navLinkStyles} to="/tutorialCategories" className='hover:text-orange-300'>
                         Courses
                     </NavLink>
                     <NavLink onClick={navLinkStyles} to="/faq" className='hover:text-orange-300'>

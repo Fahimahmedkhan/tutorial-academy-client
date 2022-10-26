@@ -8,6 +8,7 @@ import Home from "../../components/Home/Home";
 import LogIn from "../../components/LogIn/LogIn";
 import Profile from "../../components/Profile/Profile";
 import Register from "../../components/Register/Register";
+import CoursesLayout from "../../layouts/CoursesLayout";
 import Main from "../../layouts/Main";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
@@ -22,8 +23,15 @@ export const routes = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/courses',
-                element: <Courses></Courses>
+                path: '/tutorialCategories',
+                element: <CoursesLayout></CoursesLayout>,
+                children: [
+                    {
+                        path: '/tutorialCategories',
+                        element: <Courses></Courses>,
+                        loader: () => fetch('https://tutorial-academy-server-fahimahmedkhan.vercel.app/tutorialCategories'),
+                    }
+                ]
             },
             {
                 path: '/faq',
