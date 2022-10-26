@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const LogIn = () => {
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleSubmit = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                navigate('/')
+            })
+            .catch(error => console.error(error))
+    }
     return (
         <div className='flex justify-center items-center m-10'>
             <div className='w-1/2 border-2 border-zinc-300 rounded-lg p-4 py-8 my-8'>
                 <h1 className='text-4xl mb-8 font-semibold'>Login Please.!</h1>
-                <form className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <div>
                         <div className="mb-2 block">
                             <Label
@@ -18,6 +35,7 @@ const LogIn = () => {
                         <TextInput
                             className='lock border-2 p-2 w-11/12 rounded-lg dark:text-black'
                             id="email1"
+                            name="email"
                             type="email"
                             placeholder="name@mail.com"
                             required={true}
@@ -33,6 +51,7 @@ const LogIn = () => {
                         <TextInput
                             className='lock border-2 p-2 w-11/12 rounded-lg dark:text-black'
                             id="password1"
+                            name="password"
                             type="password"
                             required={true}
                         />
@@ -52,7 +71,7 @@ const LogIn = () => {
                 </div>
                 <div className="icons bg-gray-700 mt-5 ">
                     <a href="https://www.linkedin.com/in/fahim-ahmed-khan-gorbo/" className="icon icon--google" target="_blank" rel='noreferrer'>
-                        <i class="fa-brands fa-google"></i>
+                        <i className="fa-brands fa-google"></i>
                     </a>
                     <a href="https://twitter.com/Fahim_Gorbo" className="icon icon--twitter" target="_blank" rel='noreferrer'>
                         <i className="fa-brands fa-twitter"></i>
