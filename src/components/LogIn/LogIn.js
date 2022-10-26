@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 
 const LogIn = () => {
-    const { signIn, providerGmailLogin } = useContext(AuthContext);
+    const { signIn, providerGmailLogin, providerGithubSignIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const navigate = useNavigate();
     const handleSubmit = event => {
@@ -32,7 +33,16 @@ const LogIn = () => {
             })
             .catch(error => console.error(error))
     }
-    
+
+    const handleGithubSignIn = () => {
+        providerGithubSignIn(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
     return (
         <div className='flex justify-center items-center m-10'>
             <div className='w-1/2 border-2 border-zinc-300 rounded-lg p-4 py-8 my-8'>
@@ -89,9 +99,9 @@ const LogIn = () => {
                     <a href="https://twitter.com/Fahim_Gorbo" className="icon icon--twitter" target="_blank" rel='noreferrer'>
                         <i className="fa-brands fa-twitter"></i>
                     </a>
-                    <a href="https://github.com/Fahimahmedkhan" className="icon icon--github" target="_blank" rel='noreferrer'>
+                    <button onClick={handleGithubSignIn} className="icon icon--github">
                         <i className="fa-brands fa-github"></i>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

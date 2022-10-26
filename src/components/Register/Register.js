@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 
 const Register = () => {
 
-    const { createUser, providerGmailLogin } = useContext(AuthContext);
+    const { createUser, providerGmailLogin, providerGithubSignIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -29,6 +30,15 @@ const Register = () => {
 
     const handleGoogleSignIn = () => {
         providerGmailLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
+    const handleGithubSignIn = () => {
+        providerGithubSignIn(githubProvider)
             .then(result => {
                 const user = result.user;
                 console.log(user);
@@ -117,9 +127,9 @@ const Register = () => {
                     <a href="https://twitter.com/Fahim_Gorbo" className="icon icon--twitter" target="_blank" rel='noreferrer'>
                         <i className="fa-brands fa-twitter"></i>
                     </a>
-                    <a href="https://github.com/Fahimahmedkhan" className="icon icon--github" target="_blank" rel='noreferrer'>
+                    <button onClick={handleGithubSignIn} className="icon icon--github">
                         <i className="fa-brands fa-github"></i>
-                    </a>
+                    </button>
                 </div>
             </div >
         </div >
