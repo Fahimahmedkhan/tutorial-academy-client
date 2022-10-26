@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const LogIn = () => {
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerGmailLogin } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+
     const navigate = useNavigate();
     const handleSubmit = event => {
         event.preventDefault();
@@ -20,6 +23,16 @@ const LogIn = () => {
             })
             .catch(error => console.error(error))
     }
+
+    const handleGoogleSignIn = () => {
+        providerGmailLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+    
     return (
         <div className='flex justify-center items-center m-10'>
             <div className='w-1/2 border-2 border-zinc-300 rounded-lg p-4 py-8 my-8'>
@@ -70,9 +83,9 @@ const LogIn = () => {
                     <hr className='border-2 bg-black border-black w-48 dark:bg-white dark:border-white' />
                 </div>
                 <div className="icons bg-gray-700 mt-5 ">
-                    <a href="https://www.linkedin.com/in/fahim-ahmed-khan-gorbo/" className="icon icon--google" target="_blank" rel='noreferrer'>
+                    <button onClick={handleGoogleSignIn} className="icon icon--google">
                         <i className="fa-brands fa-google"></i>
-                    </a>
+                    </button>
                     <a href="https://twitter.com/Fahim_Gorbo" className="icon icon--twitter" target="_blank" rel='noreferrer'>
                         <i className="fa-brands fa-twitter"></i>
                     </a>

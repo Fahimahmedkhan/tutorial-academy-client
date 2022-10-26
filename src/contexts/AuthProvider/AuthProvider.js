@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -19,6 +19,11 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // Gmail authentication
+    const providerGmailLogin = (provider) => {
+        return signInWithPopup(auth, provider);
+    }
+
     const logOut = () => {
         return signOut(auth);
     }
@@ -32,7 +37,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    const authInfo = { user, createUser, signIn, logOut };
+    const authInfo = { user, createUser, signIn, logOut, providerGmailLogin };
 
     return (
         <AuthContext.Provider value={authInfo}>
