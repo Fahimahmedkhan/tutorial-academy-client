@@ -1,5 +1,7 @@
 import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import logo from '../../utilities/images/logo.png';
 import Toggle from '../Toggle/Toggle';
 
@@ -11,6 +13,15 @@ const NavBar = () => {
             fontSize: isActive ? '24px' : '20px',
         }
     }
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+
+
     return (
         <nav className='px-20 py-2 text-xl font-bold border-b-4 border-zinc-300 flex items-center justify-between text-black dark:text-white bg-white dark:bg-gray-900'>
             <div className='flex items-center justify-between space-x-32'>
@@ -30,7 +41,14 @@ const NavBar = () => {
                     <Toggle></Toggle>
                 </div>
                 <div>
-                    <NavLink style={navLinkStyles} to='/login' className='hover:text-orange-300'>Login</NavLink>
+                    {
+                        user?.uid ?
+                            <>
+                                <button onClick={handleLogOut} className='hover:text-orange-300'>Log out</button>
+                            </>
+                            :
+                            <NavLink style={navLinkStyles} to='/login' className='hover:text-orange-300'>Login</NavLink>
+                    }
                 </div>
             </div>
         </nav>
