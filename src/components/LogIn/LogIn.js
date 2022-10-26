@@ -3,12 +3,16 @@ import { Label, TextInput, Button } from "flowbite-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth';
+import { useState } from 'react';
 
 const LogIn = () => {
-    const { signIn, providerGmailLogin, providerGithubSignIn, providerFacebookSignIn } = useContext(AuthContext);
+    const { signIn, providerGmailLogin, providerGithubSignIn, providerFacebookSignIn, resetPassword } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
+
+    const [error, setError] = useState('');
+    const [userEmail, setUserEmail] = useState('');
 
     const navigate = useNavigate();
     const handleSubmit = event => {
@@ -23,7 +27,26 @@ const LogIn = () => {
                 form.reset();
                 navigate('/')
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error);
+                setError(error.message)
+            })
+    }
+
+    const handelEmailBlur = event => {
+        const email = event.target.value;
+        setUserEmail(email);
+    }
+
+    const handelForgetPassword = () => {
+        resetPassword(userEmail)
+            .then(() => {
+                alert('Password Reset Email Sent. Please Check Your Email in spam folder')
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message)
+            })
     }
 
     const handleGoogleSignIn = () => {
@@ -69,6 +92,7 @@ const LogIn = () => {
                             className='lock border-2 p-2 w-11/12 rounded-lg dark:text-black'
                             id="email1"
                             name="email"
+                            onBlur={handelEmailBlur}
                             type="email"
                             placeholder="name@mail.com"
                             required={true}
@@ -89,8 +113,9 @@ const LogIn = () => {
                             required={true}
                         />
                     </div>
+                    <p className='text-2xl mx-4 my-4 text-red-800 dark:text-orange-600'>{error}</p>
                     <div className='flex justify-between items-center px-4'>
-                        <Link className='text-xl text-semibold hover:text-blue-800 dark:hover:text-orange-500' to='/forget'>Forget Password??</Link>
+                        <button onClick={handelForgetPassword} className='text-xl text-semibold hover:text-blue-800 dark:hover:text-orange-500' >Forget Password??</button>
                         <Link className='text-xl text-semibold hover:text-blue-800 dark:hover:text-orange-500' to='/register'>Create an Account</Link>
                     </div>
                     <Button type="submit">

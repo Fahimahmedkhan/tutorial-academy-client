@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import logo from '../../utilities/images/logo.png';
 import Toggle from '../Toggle/Toggle';
+import { FaUser } from 'react-icons/fa';
+import { Avatar } from "flowbite-react";
 
 
 const NavBar = () => {
@@ -48,6 +50,15 @@ const NavBar = () => {
                             </>
                             :
                             <NavLink style={navLinkStyles} to='/login' className='hover:text-orange-300'>Login</NavLink>
+                    }
+                </div>
+                <div>
+                    {user?.photoURL ?
+                        <Avatar
+                            img={user?.photoURL}
+                            rounded={true}
+                        />
+                        : <FaUser></FaUser>
                     }
                 </div>
             </div>

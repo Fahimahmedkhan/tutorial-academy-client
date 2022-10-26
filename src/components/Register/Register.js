@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider, getAuth, sendEmailVerification } from 'firebase/auth';
+import app from '../../firebase/firebase.config';
 
 const Register = () => {
 
@@ -11,8 +12,12 @@ const Register = () => {
     const githubProvider = new GithubAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
 
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+
     const handleSubmit = event => {
         event.preventDefault();
+        setSuccess(false);
         const form = event.target;
         const fullName = form.fullName.value;
         const photoURL = form.photoURL.value;
@@ -24,9 +29,23 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setSuccess(true);
                 form.reset();
+                verifyEmail();
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                setError(error.message)
+            })
+    }
+
+    const auth = getAuth(app);
+
+    const verifyEmail = () => {
+        sendEmailVerification(auth.currentUser)
+            .then(() => {
+                alert('Please Check Your Email to Verify in spam folder')
+            })
     }
 
     const handleGoogleSignIn = () => {
@@ -65,6 +84,7 @@ const Register = () => {
                         <div className="mb-2 block">
                             <Label
                                 htmlFor="fullName"
+                                value="Your Full Name"
                             />
                         </div>
                         <TextInput
@@ -80,6 +100,7 @@ const Register = () => {
                         <div className="mb-2 block">
                             <Label
                                 htmlFor="photoURL"
+                                value="Your Photo URL"
                             />
                         </div>
                         <TextInput
@@ -95,6 +116,7 @@ const Register = () => {
                         <div className="mb-2 block">
                             <Label
                                 htmlFor="email1"
+                                value="Your Email"
                             />
                         </div>
                         <TextInput
@@ -110,6 +132,7 @@ const Register = () => {
                         <div className="mb-2 block">
                             <Label
                                 htmlFor="password"
+                                value="Your Password"
                             />
                         </div>
                         <TextInput
@@ -120,6 +143,12 @@ const Register = () => {
                             required={true}
                         />
                     </div>
+                    {
+                        error && <p className='text-2xl mx-4 my-4 text-red-800 dark:text-orange-600'>{error}</p>
+                    }
+                    {
+                        success && <p className='text-2xl mx-4 my-4 text-lime-500 dark:text-green-100'>User Created Successfully.</p>
+                    }
                     <Link className='flex justify-end pr-8 text-xl text-semibold hover:text-blue-800 dark:hover:text-orange-500' to='/login'>Already Have an Account?</Link>
                     <Button type="submit">
                         <h1 className='text-2xl'>Register Now</h1>
