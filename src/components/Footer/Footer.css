@@ -44,6 +44,10 @@
     background-color: #2ea44f;
     outline-color: #2ea44f;
 }
+.icon--google:hover{
+    background-color: #2ea44f;
+    outline-color: #2ea44f;
+}
 @keyframes shake{
     10%{transform: rotate(15deg);}
     20%{transform: rotate(-15deg);}
