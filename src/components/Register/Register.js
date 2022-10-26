@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider, getAuth, sendEmailVerification } from 'firebase/auth';
+import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider, getAuth, sendEmailVerification, updateProfile } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 
 const Register = () => {
@@ -19,11 +19,11 @@ const Register = () => {
         event.preventDefault();
         setSuccess(false);
         const form = event.target;
-        const fullName = form.fullName.value;
+        const name = form.name.value;
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(fullName, photoURL, email, password);
+        console.log(name, photoURL, email, password);
 
         createUser(email, password)
             .then(result => {
@@ -32,6 +32,7 @@ const Register = () => {
                 setSuccess(true);
                 form.reset();
                 verifyEmail();
+                updateUserNameAndPhoto(name, photoURL);
             })
             .catch(error => {
                 console.error(error);
@@ -45,6 +46,19 @@ const Register = () => {
         sendEmailVerification(auth.currentUser)
             .then(() => {
                 alert('Please Check Your Email to Verify in spam folder')
+            })
+    }
+
+    const updateUserNameAndPhoto = (name, photoURL) => {
+        updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photoURL,
+        })
+            .then(() => {
+                console.log('display name')
+            })
+            .catch(error => {
+                console.error(error);
             })
     }
 
@@ -83,15 +97,15 @@ const Register = () => {
                     <div>
                         <div className="mb-2 block">
                             <Label
-                                htmlFor="fullName"
+                                htmlFor="name"
                                 value="Your Full Name"
                             />
                         </div>
                         <TextInput
                             className='lock border-2 p-2 w-11/12 rounded-lg dark:text-black'
-                            id="fullName"
+                            id="name"
                             type="text"
-                            name="fullName"
+                            name="name"
                             placeholder="Your Full Name"
                             required={true}
                         />

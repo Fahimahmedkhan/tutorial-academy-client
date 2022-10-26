@@ -11,6 +11,7 @@ const LogIn = () => {
     const githubProvider = new GithubAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
 
+    const [userProfile, setUserProfile] = useState({});
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState('');
 
@@ -25,7 +26,8 @@ const LogIn = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                navigate('/')
+                setUserProfile(user);
+                navigate('/');
             })
             .catch(error => {
                 console.error(error);
@@ -54,6 +56,7 @@ const LogIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setUserProfile(user);
             })
             .catch(error => console.error(error))
     }
@@ -63,6 +66,7 @@ const LogIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setUserProfile(user);
             })
             .catch(error => console.error(error))
     }
@@ -72,6 +76,7 @@ const LogIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setUserProfile(user);
             })
             .catch(error => console.error(error))
     }
@@ -84,7 +89,7 @@ const LogIn = () => {
                     <div>
                         <div className="mb-2 block">
                             <Label
-                                htmlFor="email1"
+                                htmlFor="email"
                                 value="Your Email"
                             />
                         </div>

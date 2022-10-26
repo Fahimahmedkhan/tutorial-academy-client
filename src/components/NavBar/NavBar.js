@@ -5,7 +5,6 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import logo from '../../utilities/images/logo.png';
 import Toggle from '../Toggle/Toggle';
 import { FaUser } from 'react-icons/fa';
-import { Avatar } from "flowbite-react";
 
 
 const NavBar = () => {
@@ -54,10 +53,7 @@ const NavBar = () => {
                 </div>
                 <div>
                     {user?.photoURL ?
-                        <Avatar
-                            img={user?.photoURL}
-                            rounded={true}
-                        />
+                        <img src={user.photoURL} alt={user.name} className='h-16 w-16 rounded-full' />
                         : <FaUser></FaUser>
                     }
                 </div>
