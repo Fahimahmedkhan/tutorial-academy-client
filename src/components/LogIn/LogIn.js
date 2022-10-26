@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 import { useState } from 'react';
@@ -14,6 +14,8 @@ const LogIn = () => {
     const [userProfile, setUserProfile] = useState({});
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const navigate = useNavigate();
     const handleSubmit = event => {
@@ -27,7 +29,7 @@ const LogIn = () => {
                 console.log(user);
                 form.reset();
                 setUserProfile(user);
-                navigate('/');
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);

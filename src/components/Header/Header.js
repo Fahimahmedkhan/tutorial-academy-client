@@ -4,7 +4,7 @@ import Nav from '../NavBar/Nav';
 
 const Header = () => {
     return (
-        <div>
+        <div className='p-0 m-0'>
             {/* <NavBar></NavBar> */}
             <Nav></Nav>
         </div>

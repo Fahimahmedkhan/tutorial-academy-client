@@ -13,33 +13,40 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const signIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     // Gmail authentication
     const providerGmailLogin = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     // Github authentication
     const providerGithubSignIn = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     // Facebook authentication
     const providerFacebookSignIn = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     const resetPassword = (email) => {
+        setLoading(true);
         return sendPasswordResetEmail(auth, email);
     }
 
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
