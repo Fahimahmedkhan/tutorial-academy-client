@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 
 const Register = () => {
 
-    const { createUser, providerGmailLogin, providerGithubSignIn } = useContext(AuthContext);
+    const { createUser, providerGmailLogin, providerGithubSignIn, providerFacebookSignIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -39,6 +40,15 @@ const Register = () => {
 
     const handleGithubSignIn = () => {
         providerGithubSignIn(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
+    const handleFacebookSignIn = () => {
+        providerFacebookSignIn(facebookProvider)
             .then(result => {
                 const user = result.user;
                 console.log(user);
@@ -124,9 +134,9 @@ const Register = () => {
                     <button onClick={handleGoogleSignIn} className="icon icon--google">
                         <i className="fa-brands fa-google"></i>
                     </button>
-                    <a href="https://twitter.com/Fahim_Gorbo" className="icon icon--twitter" target="_blank" rel='noreferrer'>
-                        <i className="fa-brands fa-twitter"></i>
-                    </a>
+                    <button onClick={handleFacebookSignIn} className="icon icon--twitter">
+                        <i className="fa-brands fa-facebook-f"></i>
+                    </button>
                     <button onClick={handleGithubSignIn} className="icon icon--github">
                         <i className="fa-brands fa-github"></i>
                     </button>
