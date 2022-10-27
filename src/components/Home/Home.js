@@ -2,6 +2,9 @@ import React from 'react';
 import Banner from '../Banner/Banner';
 import HomeCard from '../HomeCard/HomeCard';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import ReactImageMagnify from 'react-image-magnify';
+import Image from '../../utilities/images/image.jpg';
+import ResizeImage from '../../utilities/images/rsz_image.jpg';
 
 /**
  * It returns a div with a bunch of other components inside of it
@@ -24,6 +27,25 @@ const Home = () => {
                 <div className='w-4/5 my-28'>
                     <h1 className='text-4xl mb-4'>Transformative learning for every team</h1>
                     <p className='text-2xl'>We meet all your learning needs, so you don’t have to spend time managing multiple providers.</p>
+                </div>
+            </div>
+            <div className='lg:flex mg:flex sm:block justify-center items-center space-x-2 w-full m-4'>
+                <div className='w-1/2'>
+                    <ReactImageMagnify {...{
+                        smallImage: {
+                            alt: 'Wristwatch by Ted Baker London',
+                            isFluidWidth: true,
+                            src: ResizeImage
+                        },
+                        largeImage: {
+                            src: Image,
+                            width: 1200,
+                            height: 1800
+                        }
+                    }} />
+                </div>
+                <div className='w-1/2'>
+                    <h1 className='text-4xl'>We share knowledge with the world</h1>
                 </div>
             </div>
             <div className='h-96 mx-10'>
