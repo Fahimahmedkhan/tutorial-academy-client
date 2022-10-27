@@ -26,7 +26,7 @@ const CourseDetail = () => {
                         </div>
                         <div className='flex justify-end items-end'>
                             <button className='px-4 py-2 text-2xl font-semibold border-2 rounded-lg bg-orange-200 hover:bg-orange-500 hover:text-white'>
-                                <Link to='/checkout'>Get Premium Access</Link>
+                                <Link to={`/checkout/${courseDetails._id}`}>Get Premium Access</Link>
                             </button>
                         </div>
                     </div>
