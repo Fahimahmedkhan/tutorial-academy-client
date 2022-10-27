@@ -10,11 +10,11 @@ const LeftSideNav = () => {
             .then(data => setTutorialCategories(data));
     }, [])
     return (
-        <div className='text-2xl p-10 text-white dark:text-white'>
+        <div className='text-2xl text-white dark:text-white py-28'>
             {
-                tutorialCategories.map(tutorialCategory => <h1 key={tutorialCategory.id}>
-                    <Link to={`/tutorialCategory/${tutorialCategory.id}`} className='hover:text-orange-500'>{tutorialCategory.name}</Link>
-                </h1>)
+                tutorialCategories.map(tutorialCategory => <div key={tutorialCategory.id}>
+                    <button className='py-4'><Link to={`/tutorialCategories/${tutorialCategory.id}`} className='hover:text-orange-500'>{tutorialCategory.name}</Link></button>
+                </div>)
             }
         </div>
     );

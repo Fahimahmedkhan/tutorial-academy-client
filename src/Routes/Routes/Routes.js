@@ -11,6 +11,8 @@ import Register from "../../components/Register/Register";
 import CoursesLayout from "../../layouts/CoursesLayout";
 import Main from "../../layouts/Main";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import Tutorials from "../../components/Tutorials/Tutorials";
+import CourseDetail from "../../components/CourseDetail/CourseDetail";
 
 export const routes = createBrowserRouter([
     {
@@ -30,8 +32,18 @@ export const routes = createBrowserRouter([
                         path: '/tutorialCategories',
                         element: <Courses></Courses>,
                         loader: () => fetch('https://tutorial-academy-server-fahimahmedkhan.vercel.app/tutorialCategories'),
+                    },
+                    {
+                        path: '/tutorialCategories/:id',
+                        element: <Tutorials></Tutorials>,
+                        loader: ({ params }) => fetch(`https://tutorial-academy-server-fahimahmedkhan.vercel.app/tutorialCategories/${params.id}`)
                     }
                 ]
+            },
+            {
+                path: '/tutorial/:id',
+                element: <CourseDetail></CourseDetail>,
+                loader: ({ params }) => fetch(`https://tutorial-academy-server-fahimahmedkhan.vercel.app/tutorial/${params.id}`)
             },
             {
                 path: '/faq',
