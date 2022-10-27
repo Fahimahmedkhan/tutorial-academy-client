@@ -29,7 +29,7 @@ const Home = () => {
                     <p className='text-2xl'>We meet all your learning needs, so you don’t have to spend time managing multiple providers.</p>
                 </div>
             </div>
-            <div className='lg:flex mg:flex sm:block justify-center items-center space-x-2 w-full m-4'>
+            <div className='lg:flex mg:flex sm:block justify-center items-center space-x-2 w-full m-4 mb-20'>
                 <div className='w-1/2'>
                     <ReactImageMagnify {...{
                         smallImage: {
