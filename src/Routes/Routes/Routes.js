@@ -13,6 +13,7 @@ import Main from "../../layouts/Main";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import Tutorials from "../../components/Tutorials/Tutorials";
 import CourseDetail from "../../components/CourseDetail/CourseDetail";
+import Checkout from "../../components/Checkout/Checkout";
 
 export const routes = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const routes = createBrowserRouter([
                 path: '/tutorial/:id',
                 element: <CourseDetail></CourseDetail>,
                 loader: ({ params }) => fetch(`https://tutorial-academy-server-fahimahmedkhan.vercel.app/tutorial/${params.id}`)
+            },
+            {
+                path: '/checkout',
+                element: <PrivateRoutes><Checkout></Checkout></PrivateRoutes>
             },
             {
                 path: '/faq',

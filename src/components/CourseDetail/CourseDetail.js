@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { FaRegFilePdf } from 'react-icons/fa';
 import Pdf from "react-to-pdf";
 
@@ -25,7 +25,9 @@ const CourseDetail = () => {
                             <p className='text-2xl'>{courseDetails.details}</p>
                         </div>
                         <div className='flex justify-end items-end'>
-                            <button className='px-4 py-2 text-2xl font-semibold border-2 rounded-lg bg-orange-200 hover:bg-orange-500 hover:text-white'>Get Premium Access</button>
+                            <button className='px-4 py-2 text-2xl font-semibold border-2 rounded-lg bg-orange-200 hover:bg-orange-500 hover:text-white'>
+                                <Link to='/checkout'>Get Premium Access</Link>
+                            </button>
                         </div>
                     </div>
                 </div>
